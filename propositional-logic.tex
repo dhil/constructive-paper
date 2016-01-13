@@ -1,0 +1,48 @@
+\section{Intuitionistic propositional logic}
+The formulas of intuitionistic propositional logic $\mathcal{L}$
+are given by the following abstract syntax.
+
+$$\mathcal{L}: \quad \varphi,\psi ::= \bot \mid p \mid \varphi \lor \psi \mid \varphi \land \psi \mid \varphi \rightarrow \psi$$
+
+Here, $p \in \mathcal{AP}$ where $\mathcal{AP}$ is a countable set of atomic propositions.
+$\bot$ denotes the false proposition, which will be evident from the semantics,
+and $\rightarrow$, $\lor$, and $\land$ denote implication, disjunction, and conjunction, respectively.
+From these operators, we can define the following derived operators:
+$$\neg \varphi \defeq \varphi \rightarrow \bot \quad \quad \top \defeq \neg \bot$$
+
+The semantics for $\mathcal{L}$ will be given in terms of Kripke models.
+
+\begin{definition}
+  A \emph{Kripke model} is a pair $\mathcal{K} = ((K,\sqsubseteq),\Sigma)$,
+  where $K$ is a partially ordered set and $\Sigma : K \rightarrow 2^\mathcal{L}$
+  is a function satisfying
+  \begin{enumerate}[(a)]
+    \item $\Sigma(k) \subseteq \mathcal{AP}$ for all $k \in K$,
+    \item $\bot \notin \Sigma(k)$ for all $k \in K$, and
+    \item $k \sqsubseteq l$ implies $\Sigma(k) \subseteq \Sigma(l)$ for all $l,k \in K$.
+  \end{enumerate}
+\end{definition}
+
+The elements of $K$ are called nodes,
+and $\Sigma$ assigns to each node $k$ the set of atomic propositions that are true $k$.
+Condition (b) ensures that $\bot$ is never true,
+and condition (c) says that $\Sigma$ is monotonic.
+
+We now give the Kripke semantics for $\mathcal{L}$.
+
+\begin{definition}
+  Given a Kripke model $\mathcal{K} = ((K,\sqsubseteq),\Sigma)$,
+  the \emph{forcing relation} $\Vdash_\mathcal{K}$ is defined inductively by
+  
+  $$
+  \begin{array}{l l l}
+    k \Vdash_\mathcal{K} p                        & \text{iff} & p \in \Sigma(k) \\
+    k \Vdash_\mathcal{K} \varphi \lor \psi        & \text{iff} & k \Vdash_\mathcal{K} \varphi \text{ and } k \Vdash_\mathcal{K} \psi \\
+    k \Vdash_\mathcal{K} \varphi \land \psi       & \text{iff} & k \Vdash_\mathcal{K} \varphi \text{ or } k \Vdash_\mathcal{K} \psi \\
+    k \Vdash_\mathcal{K} \varphi \rightarrow \psi & \text{iff} & l \Vdash_\mathcal{K} \varphi \text{ implies } l \Vdash_\mathcal{K} \psi \text{ for all } l \sqsupseteq k
+  \end{array}
+  $$
+\end{definition}
+
+We will drop the subscript $\mathcal{K}$ unless it is not clear from the context
+which Kripke model the forcing relation is referring to.
