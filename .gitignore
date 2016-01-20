@@ -127,3 +127,13 @@ sympy-plots-for-*.tex/
 
 \#*
 *~
+
+#
+*.aux.make
+*.auxbbl.make
+*.auxbbl.make.temp
+*.auxtarget.make
+*.d
+*.out.make
+paper.pdf
+
